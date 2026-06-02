@@ -1,0 +1,150 @@
+import math
+
+# functions go here...
+
+
+def make_statement(statement, decoration, lines):
+    """Creates headings (3 lines), subheadings (2 lines) and
+    emphasised text / mini-headings (1 line).  Only use emoji for
+    single line statements"""
+
+    middle = f"{decoration * 3} {statement} {decoration * 3}"
+    top_bottom = decoration * len(middle)
+
+    if lines == 1:
+        print(middle)
+    elif lines == 2:
+        print(middle)
+        print(top_bottom)
+
+    else:
+        print(top_bottom)
+        print(middle)
+        print(top_bottom)
+
+
+# Functions go here
+def string_check(question, valid_ans_list, num_letters):
+    """Checks that users enter the full word
+    or the 'n' letter/s of a word from a list of valid responses"""
+
+    while True:
+
+        response = input(question).lower()
+
+        for item in valid_ans_list:
+            if response == item:
+                return item
+
+            elif response == item[:num_letters]:
+                return item
+        print(f"Please choose an option from the list {valid_ans_list}")
+
+
+# Functions go here
+def int_check(question, low, high):
+
+    error = f"Oops - please enter an number that is higher or equal to {low} and lower or equal to {high} ."
+
+    while True:
+
+        try:
+            response = float(input(question))
+
+            if low <= response and high >= response:
+                return response
+
+            else:
+                print(error)
+
+        except ValueError:
+            print(error)
+
+
+instructions = ["yes", "no", "exit"]
+shape_list = ["circle", "square", "rectangle", "parralelogram", "exit"]
+bye = ["continue", "exit"]
+history = []
+want_instructions = string_check(
+    "Do you want to read the instructions? (type 'exit' to quit): ",
+    instructions, 1)
+
+if want_instructions == "yes":
+    make_statement("Instructions", "=", 3)
+    print()
+    make_statement(
+        "Pick either area or perimeter, then choose your shape and input the sizes of the sides!",
+        "-",
+        2,
+    )
+    print()
+    make_statement(
+        "The calculator will find the area or perimeter as well as showing you what equation it used",
+        "!",
+        1,
+    )
+elif want_instructions == "no":
+    print("you chose no")
+
+shape_select = string_check("Pick a shape: ", shape_list, 1)
+print(f"You chose {shape_select}")
+history.append(shape_select)
+
+while True:
+    if shape_select == shape_list[0]:
+        radius = int_check("Enter radius: ", 0.1, 100)
+
+        circumfrence = 2 * math.pi * radius
+        area = math.pi * radius * radius
+        circ= f"The circumference of the circle is: {circumfrence:.2f} "
+        print(circ)
+        ar = f"The area of the circle is: {area:.2f} "
+        print(ar)
+        history.append(circ)
+        history.append(ar)
+
+    elif shape_select == shape_list[1]:
+        length = int_check("enter the size of your side: ", 0.1, 100)
+        area = length * length
+        perimeter = length + length + length + length
+
+        ar = f"The area of the square is: {area:.2f} "
+        print(ar)
+        per = f"The perimeter of the square is: {perimeter}"
+        print(per)
+        history.append(per)
+        history.append(ar)
+
+    elif shape_select == shape_list[2]:
+        first_length = int_check("enter the size of your first side: ", 0.1,
+                                 100)
+        second_length = int_check("enter the size of your second side: ", 0.1,
+                                  100)
+        area = first_length * second_length
+        perimeter = first_length + first_length + second_length + second_length
+        ar = f"The area of the rectangle is: {area:.2f} "
+        print(ar)
+        per = f"The perimeter of the rectangle is: {perimeter}"
+        print(per)
+        history.append(per)
+        history.append(ar)
+
+    elif shape_select == shape_list[3]:
+        length = int_check("enter the size of your side: ", 0.1, 100)
+        height = int_check("enter the height of your shape: ", 0.1, 100)
+        area = length * height
+        perimeter = length + length + length + length
+
+        ar = f"The area of the parralelogram is: {area:.2f} "
+        print(ar)
+        per = f"The perimeter of the parralelogram is: {perimeter}"
+        print(per)
+        history.append(per)
+        history.append(ar)
+    leave = string_check("Exit or continue?  ", bye, 1)
+
+    if leave == "continue":
+        continue
+    elif leave == "exit":
+        print(history)
+        break

@@ -1,0 +1,16 @@
+import pandas as pd
+import math
+
+# 1. Collect data in a standard Python list
+data_list = []
+
+for radius in range(1, 4):
+    circumference = 2 * math.pi * radius
+    area = math.pi * radius * radius
+
+    # Store as a dictionary matching column names
+    data_list.append({"Circumference": circumfrence, "Area": area})
+
+# 2. Create the DataFrame all at once
+df = pd.DataFrame(data_list)
+print(df)

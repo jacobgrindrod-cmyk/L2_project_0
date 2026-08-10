@@ -79,9 +79,10 @@ shape_list = ["circle", "square", "rectangle", "parallelogram"]
 exit_code = ["continue", "exit"]
 
 data_list = []
-
+print('Welcome to the shape area and perimeter calculator!')
 # Instructions checker
-want_instructions = string_check("Do you want to read the instructions? yes(y) or no(n): ",
+want_instructions = string_check("Do you want to read the instructions? "
+                                 "yes(y) or no(n): ",
                                  instructions, 1)
 # Instructions loop
 if want_instructions == "yes":
@@ -107,7 +108,8 @@ while True:
 
     # Shape Selection
     shape_select = string_check("Pick a shape from the list "
-                                "[circle (c), square (s), rectangle (r), parallelogram (p)]: ", shape_list, 1)
+                                "[circle (c), square (s), rectangle (r), "
+                                "parallelogram (p)]: ", shape_list, 1)
     print(f"You chose {shape_select}")
 
     # Circle calculations
@@ -164,10 +166,11 @@ while True:
         leave = string_check("Exit(e) or continue(c)?  ", exit_code, 1)
     # Parallelogram calculations
     elif shape_select == shape_list[3]:
-        length = int_check("enter the length of your shape: ", 0.1, 100)
+        base = int_check("enter the base length of your shape: ", 0.1, 100)
         height = int_check("enter the height of your shape: ", 0.1, 100)
-        area = length * height
-        perimeter = length + length + length + length
+        side = int_check("enter the side length of your shape: ", 0.1, 100)
+        area = base * height
+        perimeter = base + side + base + side
         shape = 'parallelogram'
         area_round = round(area, 2)
         perimeter_round = round(perimeter, 2)
